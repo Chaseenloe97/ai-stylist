@@ -174,7 +174,9 @@ Key traits:
   }
 
   try {
-    console.log('Sending request to OpenAI with', messages.length, 'messages');
+    console.log('=== OpenAI Request ===');
+    console.log('Total messages:', messages.length);
+    console.log('Messages being sent:', JSON.stringify(messages, null, 2));
 
     // Add timeout to prevent hanging
     const controller = new AbortController();
@@ -215,8 +217,13 @@ Key traits:
     const data = await response.json();
 
     if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+      console.error('Invalid OpenAI response:', data);
       throw new Error('Invalid response format from OpenAI');
     }
+
+    console.log('=== OpenAI Response ===');
+    console.log('Response:', data.choices[0].message.content);
+    console.log('Tokens used:', data.usage);
 
     return data.choices[0].message.content;
   } catch (error) {

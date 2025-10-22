@@ -46,7 +46,9 @@ export default function Chat({ styleProfile }) {
       let response;
 
       if (hasApiKey) {
-        console.log('Using GPT-4 for chat response...');
+        console.log('=== Chat Handler ===');
+        console.log('User input:', userInput);
+        console.log('Current messages count:', messages.length);
 
         // Build conversation history, excluding the initial greeting
         // Start from index 1 to skip the first "Welcome" message
@@ -64,10 +66,12 @@ export default function Chat({ styleProfile }) {
           text: userInput
         });
 
-        console.log('Sending conversation with', conversationHistory.length, 'messages');
+        console.log('Conversation history:', conversationHistory);
 
         // Call API with clean conversation history
         response = await chatWithVic(conversationHistory, userInput, null, styleProfile);
+
+        console.log('Got response:', response);
       } else {
         console.log('Using mock response...');
         await new Promise(resolve => setTimeout(resolve, 1500));
