@@ -25,41 +25,46 @@ export default function Chat({ styleProfile }) {
   }, [messages]);
 
   const handleSend = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || isTyping) return;
 
+    const userInput = input.trim();
     const userMessage = {
       role: 'user',
-      content: input,
+      content: userInput,
       timestamp: new Date()
     };
 
+    // Add user message immediately
     setMessages(prev => [...prev, userMessage]);
-    const userInput = input;
     setInput('');
     setIsTyping(true);
     setError(null);
 
     try {
-      // Always use real AI if API key exists
       const hasApiKey = getApiKey();
 
       let response;
 
       if (hasApiKey) {
-        // Use real GPT-4 API
         console.log('Using GPT-4 for chat response...');
 
-        // Build conversation history (text only, no images for simplicity)
+        // Build conversation history INCLUDING the user's current message
         const conversationHistory = messages
-          .filter(msg => !msg.image) // Skip image messages for simplicity
+          .filter(msg => !msg.image && msg.content) // Skip image messages and ensure content exists
           .map(msg => ({
             sender: msg.role,
             text: msg.content
           }));
 
+        // Add the current user message to history
+        conversationHistory.push({
+          sender: 'user',
+          text: userInput
+        });
+
+        // Call API with full history
         response = await chatWithVic(conversationHistory, userInput, null, styleProfile);
       } else {
-        // Use mock response
         console.log('Using mock response...');
         await new Promise(resolve => setTimeout(resolve, 1500));
         response = generateVicResponse(userInput, styleProfile);
@@ -79,7 +84,7 @@ export default function Chat({ styleProfile }) {
       // Add error message to chat
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: `I apologize, but I encountered an issue: ${err.message}\n\nPlease check your API key or try again.`,
+        content: `I apologize, but I encountered an issue: ${err.message}\n\nPlease try again or check your internet connection.`,
         timestamp: new Date(),
         isError: true
       }]);

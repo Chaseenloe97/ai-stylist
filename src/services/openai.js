@@ -158,7 +158,8 @@ Tailor your advice to align with and elevate their established aesthetic.`;
     }))
   ];
 
-  // Add current user message
+  // Only add current user message if it has an image (for image analysis)
+  // Otherwise, the message is already in conversationHistory
   if (imageDataUrl) {
     messages.push({
       role: 'user',
@@ -176,14 +177,15 @@ Tailor your advice to align with and elevate their established aesthetic.`;
         }
       ]
     });
-  } else {
-    messages.push({
-      role: 'user',
-      content: userMessage
-    });
   }
 
   try {
+    console.log('Sending request to OpenAI with', messages.length, 'messages');
+
+    // Add timeout to prevent hanging
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
     const response = await fetch(OPENAI_API_URL, {
       method: 'POST',
       headers: {
@@ -195,18 +197,41 @@ Tailor your advice to align with and elevate their established aesthetic.`;
         messages: messages,
         max_tokens: 800,
         temperature: 0.8
-      })
+      }),
+      signal: controller.signal
     });
 
+    clearTimeout(timeoutId);
+
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error?.message || 'Failed to get response from Vic');
+      const errorText = await response.text();
+      let errorMessage = 'Failed to get response from Vic';
+
+      try {
+        const errorData = JSON.parse(errorText);
+        errorMessage = errorData.error?.message || errorMessage;
+      } catch (e) {
+        errorMessage = errorText || errorMessage;
+      }
+
+      console.error('OpenAI API Error Response:', errorText);
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
+
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+      throw new Error('Invalid response format from OpenAI');
+    }
+
     return data.choices[0].message.content;
   } catch (error) {
     console.error('OpenAI API Error:', error);
+
+    if (error.name === 'AbortError') {
+      throw new Error('Request timed out. Please try again.');
+    }
+
     throw error;
   }
 };
