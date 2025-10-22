@@ -225,12 +225,9 @@ export default function Home({ onStyleLearned }) {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-serif text-base md:text-lg font-bold mb-2 group-hover:text-gold-600 transition-colors">
+                        <h3 className="font-serif text-base md:text-lg font-bold group-hover:text-gold-600 transition-colors">
                           Select Photos
                         </h3>
-                        <p className="text-xs text-ink-600 font-light leading-relaxed">
-                          Pick individual photos manually
-                        </p>
                       </div>
                     </div>
                   </button>
@@ -247,14 +244,9 @@ export default function Home({ onStyleLearned }) {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-serif text-base md:text-lg font-bold mb-2 group-hover:text-gold-600 transition-colors">
+                        <h3 className="font-serif text-base md:text-lg font-bold group-hover:text-gold-600 transition-colors">
                           Full Library Scan
                         </h3>
-                        <p className="text-xs text-ink-600 font-light leading-relaxed">
-                          {isFileSystemAccessSupported()
-                            ? 'Automatically scan entire folder'
-                            : 'Select as many photos as you want'}
-                        </p>
                       </div>
                     </div>
                   </button>
