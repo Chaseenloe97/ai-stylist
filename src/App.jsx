@@ -42,7 +42,7 @@ function App() {
   const handleStyleLearned = (profile) => {
     setStyleProfile(profile);
     localStorage.setItem('styleProfile', JSON.stringify(profile));
-    setCurrentTab('chat');
+    setCurrentTab('profile'); // Navigate to Profile tab to see results
   };
 
   const handleRefresh = () => {

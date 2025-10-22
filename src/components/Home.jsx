@@ -45,6 +45,16 @@ export default function Home({ onStyleLearned }) {
     }
   };
 
+  const handleIndividualPhotos = async () => {
+    try {
+      setError(null);
+      const imageDataUrls = await selectPhotoFiles(50);
+      setUploadedImages(prev => [...prev, ...imageDataUrls]);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   const analyzeStyle = async () => {
     if (uploadedImages.length === 0) return;
 
@@ -177,58 +187,74 @@ export default function Home({ onStyleLearned }) {
 
 
               {/* Connection Options */}
-              <div className="max-w-3xl mx-auto mb-8 md:mb-12 px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              <div className="max-w-5xl mx-auto mb-8 md:mb-12 px-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                   {/* Instagram Connect */}
                   <button
                     disabled={true}
-                    className="card-luxury p-4 md:p-8 text-left opacity-60 cursor-not-allowed"
+                    className="card-luxury p-4 md:p-6 text-left opacity-60 cursor-not-allowed"
                   >
-                    <div className="flex items-start space-x-3 md:space-x-4">
-                      <div className="w-14 h-14 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                        <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <div className="flex flex-col items-center text-center space-y-3">
+                      <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <svg className="w-6 h-6 md:w-7 md:h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                         </svg>
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-serif text-lg md:text-xl font-bold mb-1 md:mb-2 group-hover:text-gold-600 transition-colors flex items-center gap-2">
+                      <div>
+                        <h3 className="font-serif text-base md:text-lg font-bold mb-1 flex items-center justify-center gap-2">
                           Connect Instagram
-                          <span className="text-xs font-light text-ink-900/50 bg-cream-100 px-2 py-0.5 rounded-full border border-cream-200">Coming Soon</span>
                         </h3>
-                        <p className="text-xs md:text-sm text-ink-600 font-light leading-relaxed">
-                          Import your posts for deeper style analysis
+                        <span className="inline-block text-xs font-light text-ink-900/50 bg-cream-100 px-2 py-0.5 rounded-full border border-cream-200 mb-2">Coming Soon</span>
+                        <p className="text-xs text-ink-600 font-light leading-relaxed">
+                          Import posts automatically
                         </p>
                       </div>
-                      <svg className="w-5 h-5 text-ink-900/30 group-hover:text-gold-500 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
                     </div>
                   </button>
 
-                  {/* Upload Photos - Uses folder picker if supported */}
+                  {/* Select Individual Photos */}
                   <button
-                    onClick={handleFolderSelect}
-                    className="group card-luxury p-4 md:p-8 text-left hover:shadow-lg transition-all duration-300"
+                    onClick={handleIndividualPhotos}
+                    className="group card-luxury p-4 md:p-6 text-left hover:shadow-lg transition-all duration-300"
                   >
-                    <div className="flex items-start space-x-3 md:space-x-4">
-                      <div className="w-12 h-12 md:w-14 md:h-14 bg-ink-900 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                        <svg className="w-6 h-6 md:w-8 md:h-8 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex flex-col items-center text-center space-y-3">
+                      <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <svg className="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-serif text-lg md:text-xl font-bold mb-1 md:mb-2 group-hover:text-gold-600 transition-colors">
-                          Upload Photos
+                      <div>
+                        <h3 className="font-serif text-base md:text-lg font-bold mb-2 group-hover:text-gold-600 transition-colors">
+                          Select Photos
                         </h3>
-                        <p className="text-xs md:text-sm text-ink-600 font-light leading-relaxed">
-                          {isFileSystemAccessSupported()
-                            ? 'Select a photo folder from your device'
-                            : 'Select multiple photos from your library'}
+                        <p className="text-xs text-ink-600 font-light leading-relaxed">
+                          Pick individual photos (up to 50)
                         </p>
                       </div>
-                      <svg className="w-4 h-4 md:w-5 md:h-5 text-ink-900/30 group-hover:text-gold-500 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
+                    </div>
+                  </button>
+
+                  {/* Full Library Scan */}
+                  <button
+                    onClick={handleFolderSelect}
+                    className="group card-luxury p-4 md:p-6 text-left hover:shadow-lg transition-all duration-300 border-2 border-gold-200"
+                  >
+                    <div className="flex flex-col items-center text-center space-y-3">
+                      <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-gold-400 to-amber-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <svg className="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-base md:text-lg font-bold mb-2 group-hover:text-gold-600 transition-colors">
+                          Full Library Scan
+                        </h3>
+                        <p className="text-xs text-ink-600 font-light leading-relaxed">
+                          {isFileSystemAccessSupported()
+                            ? 'Scan entire folder (up to 200)'
+                            : 'Select many photos (up to 200)'}
+                        </p>
+                      </div>
                     </div>
                   </button>
                 </div>

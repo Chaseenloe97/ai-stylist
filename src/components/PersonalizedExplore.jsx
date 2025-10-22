@@ -59,7 +59,7 @@ export default function PersonalizedExplore() {
           .map(msg => msg.content)
           .join('\n');
 
-        const analysisPrompt = `Based on this user's recent chat history and their analyzed style profile, recommend 10 specific outfit combinations that match their aesthetic.
+        const analysisPrompt = `Based on this user's recent chat history and their analyzed style profile, recommend 9 specific outfit combinations that match their aesthetic.
 
 User's chat history:
 ${userMessages}
@@ -71,7 +71,7 @@ ${parsedProfile ? `User's style profile:
 - Lifestyle: ${parsedProfile.lifestyle}
 - Luxury Preferences: ${parsedProfile.luxuryProfile}` : ''}
 
-Provide 10 outfit recommendations in this EXACT JSON format:
+Provide 9 outfit recommendations in this EXACT JSON format:
 {
   "summary": "A brief 1-sentence summary of what the user is looking for",
   "outfits": [
@@ -232,19 +232,6 @@ Make searchQuery very specific for finding good outfit photos on Unsplash (e.g.,
           { item: "Running Shoes", url: "https://www.google.com/search?q=running+shoes+men&tbm=shop" }
         ]
       },
-      {
-        title: "Heritage Classic",
-        description: "Timeless Americana with a modern twist",
-        items: ["Flannel shirt", "Raw denim", "Work boots"],
-        priceRange: "$250-$450",
-        occasion: "casual",
-        searchQuery: "heritage workwear americana style",
-        shoppingLinks: [
-          { item: "Flannel Shirt", url: "https://www.google.com/search?q=flannel+shirt+men&tbm=shop" },
-          { item: "Raw Denim Jeans", url: "https://www.google.com/search?q=raw+denim+jeans&tbm=shop" },
-          { item: "Work Boots", url: "https://www.google.com/search?q=work+boots+men&tbm=shop" }
-        ]
-      }
     ];
   };
 
