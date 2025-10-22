@@ -73,26 +73,26 @@ function App() {
     <div className="min-h-screen bg-cream-50">
       {/* Top Navigation Banner */}
       <nav className="sticky top-0 z-50 bg-white border-b border-cream-200 shadow-sm">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex items-center justify-between h-16">
+        <div className="max-w-6xl mx-auto px-3 md:px-6">
+          <div className="flex items-center justify-between h-14 md:h-16">
             {/* Logo */}
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-ink-900 flex items-center justify-center">
-                <span className="text-xl text-gold-400 font-serif italic">V</span>
+            <div className="flex items-center space-x-2 md:space-x-3">
+              <div className="w-8 h-8 md:w-10 md:h-10 bg-ink-900 flex items-center justify-center">
+                <span className="text-lg md:text-xl text-gold-400 font-serif italic">V</span>
               </div>
-              <div>
-                <h1 className="font-serif font-bold text-lg text-ink-900">Vic</h1>
+              <div className="hidden sm:block">
+                <h1 className="font-serif font-bold text-base md:text-lg text-ink-900">Vic</h1>
                 <p className="text-xs text-ink-600 font-light -mt-1">Style Curator</p>
               </div>
             </div>
 
             {/* Navigation Tabs */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 md:space-x-2">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setCurrentTab(tab.id)}
-                  className={`flex items-center space-x-2 px-4 py-2 transition-all duration-300 relative ${
+                  className={`flex items-center space-x-1 md:space-x-2 px-2 md:px-4 py-2 transition-all duration-300 relative ${
                     currentTab === tab.id
                       ? 'text-ink-900 bg-cream-100'
                       : 'text-ink-900/50 hover:text-ink-900/80 hover:bg-cream-50'
@@ -103,7 +103,7 @@ function App() {
                   }`}>
                     {tab.icon}
                   </div>
-                  <span className="text-sm font-medium tracking-wide hidden md:inline">
+                  <span className="text-xs md:text-sm font-medium tracking-wide hidden sm:inline">
                     {tab.label}
                   </span>
                   {currentTab === tab.id && (

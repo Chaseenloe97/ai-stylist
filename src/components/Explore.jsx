@@ -241,34 +241,34 @@ export default function Explore({ styleProfile }) {
 
   if (!styleProfile) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-cream-50 to-white flex items-center justify-center px-6 pt-16">
+      <div className="min-h-screen bg-gradient-to-b from-cream-50 to-white flex items-center justify-center px-3 md:px-6 pt-8 md:pt-16">
         <div className="max-w-xl text-center">
-          <div className="w-24 h-24 mx-auto mb-8 bg-cream-100 border-2 border-cream-200 flex items-center justify-center">
-            <svg className="h-12 w-12 text-ink-900/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6 md:mb-8 bg-cream-100 border-2 border-cream-200 flex items-center justify-center">
+            <svg className="h-10 w-10 md:h-12 md:w-12 text-ink-900/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
 
-          <h2 className="text-3xl font-serif font-bold text-ink-900 mb-4">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-ink-900 mb-3 md:mb-4">
             Discover Your Style First
           </h2>
-          <p className="text-ink-600 mb-8 leading-relaxed font-light">
+          <p className="text-sm md:text-base text-ink-600 mb-6 md:mb-8 leading-relaxed font-light">
             Upload photos to build your style profile, then Vic will curate personalized outfit recommendations just for you.
           </p>
 
-          <div className="card-luxury p-6 text-left">
-            <h3 className="font-serif text-lg font-bold mb-3">How It Works</h3>
-            <ol className="space-y-3 text-sm text-ink-600">
+          <div className="card-luxury p-4 md:p-6 text-left">
+            <h3 className="font-serif text-base md:text-lg font-bold mb-3">How It Works</h3>
+            <ol className="space-y-2 md:space-y-3 text-xs md:text-sm text-ink-600">
               <li className="flex items-start">
-                <span className="text-gold-500 mr-3 font-serif">1.</span>
+                <span className="text-gold-500 mr-2 md:mr-3 font-serif">1.</span>
                 <span className="font-light">Upload photos on the Discover page</span>
               </li>
               <li className="flex items-start">
-                <span className="text-gold-500 mr-3 font-serif">2.</span>
+                <span className="text-gold-500 mr-2 md:mr-3 font-serif">2.</span>
                 <span className="font-light">Vic analyzes your aesthetic preferences</span>
               </li>
               <li className="flex items-start">
-                <span className="text-gold-500 mr-3 font-serif">3.</span>
+                <span className="text-gold-500 mr-2 md:mr-3 font-serif">3.</span>
                 <span className="font-light">Return here for curated outfit suggestions</span>
               </li>
             </ol>
@@ -279,37 +279,37 @@ export default function Explore({ styleProfile }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cream-50 to-white pt-16 pb-12">
-      <div className="max-w-6xl mx-auto px-6">
+    <div className="min-h-screen bg-gradient-to-b from-cream-50 to-white pt-8 md:pt-16 pb-8 md:pb-12">
+      <div className="max-w-6xl mx-auto px-3 md:px-6">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 tracking-tight">
+        <div className="text-center mb-6 md:mb-12">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold mb-3 md:mb-4 tracking-tight">
             Curated For You
           </h1>
-          <p className="text-lg text-ink-700 max-w-2xl mx-auto font-light">
+          <p className="text-sm md:text-lg text-ink-700 max-w-2xl mx-auto font-light px-3">
             Outfit recommendations tailored to your <span className="font-medium">{styleProfile.topStyles?.[0]}</span> aesthetic
           </p>
         </div>
 
         {/* Category Filter */}
-        <div className="flex items-center justify-center space-x-3 mb-12">
+        <div className="flex items-center justify-center gap-2 md:space-x-3 mb-6 md:mb-12 flex-wrap">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
-              className={`px-6 py-3 transition-all duration-300 ${
+              className={`px-3 md:px-6 py-2 md:py-3 transition-all duration-300 ${
                 selectedCategory === category.id
                   ? 'bg-ink-900 text-cream-50 shadow-lg'
                   : 'bg-white text-ink-900 border border-cream-200 hover:border-gold-400'
               }`}
             >
-              <span className="text-sm font-medium tracking-wide">{category.label}</span>
+              <span className="text-xs md:text-sm font-medium tracking-wide">{category.label}</span>
             </button>
           ))}
         </div>
 
         {/* Outfit Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {outfitSuggestions.map((outfit) => (
             <div key={outfit.id} className="card-luxury overflow-hidden group">
               {/* Image */}
@@ -332,9 +332,9 @@ export default function Explore({ styleProfile }) {
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <h3 className="font-serif text-xl font-bold mb-2">{outfit.title}</h3>
-                <p className="text-sm text-ink-600 font-light mb-4 leading-relaxed">
+              <div className="p-4 md:p-6">
+                <h3 className="font-serif text-lg md:text-xl font-bold mb-1 md:mb-2">{outfit.title}</h3>
+                <p className="text-xs md:text-sm text-ink-600 font-light mb-3 md:mb-4 leading-relaxed">
                   {outfit.description}
                 </p>
 
