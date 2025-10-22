@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import GetStarted from './components/GetStarted';
 import Home from './components/Home';
 import Chat from './components/Chat';
 import Profile from './components/Profile';
@@ -7,8 +8,16 @@ import Explore from './components/Explore';
 function App() {
   const [currentTab, setCurrentTab] = useState('home');
   const [styleProfile, setStyleProfile] = useState(null);
+  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(false);
 
   useEffect(() => {
+    // Check if user has completed onboarding
+    const savedUser = localStorage.getItem('vicUser');
+    if (savedUser) {
+      setHasCompletedOnboarding(true);
+    }
+
+    // Load style profile if it exists
     const saved = localStorage.getItem('styleProfile');
     if (saved) {
       try {
@@ -19,6 +28,16 @@ function App() {
       }
     }
   }, []);
+
+  const handleOnboardingComplete = (userData) => {
+    console.log('User signed up:', userData);
+    setHasCompletedOnboarding(true);
+  };
+
+  // Show Get Started page if user hasn't completed onboarding
+  if (!hasCompletedOnboarding) {
+    return <GetStarted onComplete={handleOnboardingComplete} />;
+  }
 
   const handleStyleLearned = (profile) => {
     setStyleProfile(profile);
