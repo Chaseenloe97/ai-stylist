@@ -4,6 +4,7 @@ export default function GetStarted({ onComplete }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    instagram: '',
     interests: []
   });
   const [currentStep, setCurrentStep] = useState(1);
@@ -42,7 +43,8 @@ export default function GetStarted({ onComplete }) {
   const canProceed = () => {
     if (currentStep === 1) return formData.name.trim().length > 0;
     if (currentStep === 2) return formData.email.trim().length > 0 && formData.email.includes('@');
-    if (currentStep === 3) return formData.interests.length > 0;
+    if (currentStep === 3) return true; // Instagram is optional, always can proceed
+    if (currentStep === 4) return formData.interests.length > 0;
     return false;
   };
 
@@ -64,7 +66,7 @@ export default function GetStarted({ onComplete }) {
 
         {/* Progress Indicator */}
         <div className="flex items-center justify-center mb-8 md:mb-12">
-          {[1, 2, 3].map((step) => (
+          {[1, 2, 3, 4].map((step) => (
             <div key={step} className="flex items-center">
               <div
                 className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-serif transition-all duration-300 ${
@@ -75,9 +77,9 @@ export default function GetStarted({ onComplete }) {
               >
                 {step}
               </div>
-              {step < 3 && (
+              {step < 4 && (
                 <div
-                  className={`w-12 md:w-16 h-0.5 mx-2 transition-all duration-300 ${
+                  className={`w-8 md:w-12 h-0.5 mx-2 transition-all duration-300 ${
                     currentStep > step ? 'bg-ink-900' : 'bg-cream-200'
                   }`}
                 />
@@ -158,8 +160,46 @@ export default function GetStarted({ onComplete }) {
               </div>
             )}
 
-            {/* Step 3: Style Interests */}
+            {/* Step 3: Instagram Handle */}
             {currentStep === 3 && (
+              <div className="animate-fade-in">
+                <h2 className="font-serif text-2xl md:text-3xl font-bold mb-2 text-ink-900">
+                  Instagram handle (optional)
+                </h2>
+                <p className="text-sm md:text-base text-ink-600 mb-6 md:mb-8 font-light">
+                  Don't have Instagram? No problem, leave it blank
+                </p>
+
+                <input
+                  type="text"
+                  value={formData.instagram}
+                  onChange={(e) => setFormData(prev => ({ ...prev, instagram: e.target.value }))}
+                  placeholder="@yourusername"
+                  className="input-luxury text-lg md:text-xl mb-6 md:mb-8"
+                  autoFocus
+                />
+
+                <div className="flex space-x-3">
+                  <button
+                    type="button"
+                    onClick={() => setCurrentStep(2)}
+                    className="btn-secondary flex-1 rounded-none"
+                  >
+                    Back
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCurrentStep(4)}
+                    className="btn-gold flex-1 rounded-none"
+                  >
+                    Continue
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Step 4: Style Interests */}
+            {currentStep === 4 && (
               <div className="animate-fade-in">
                 <h2 className="font-serif text-2xl md:text-3xl font-bold mb-2 text-ink-900">
                   What styles interest you?
@@ -191,7 +231,7 @@ export default function GetStarted({ onComplete }) {
                 <div className="flex space-x-3">
                   <button
                     type="button"
-                    onClick={() => setCurrentStep(2)}
+                    onClick={() => setCurrentStep(3)}
                     className="btn-secondary flex-1 rounded-none"
                   >
                     Back

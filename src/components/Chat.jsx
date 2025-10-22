@@ -42,11 +42,14 @@ export default function Chat({ styleProfile }) {
 
     try {
       const hasApiKey = getApiKey();
+      console.log('=== Chat Handler ===');
+      console.log('API Key present:', hasApiKey ? 'YES' : 'NO');
+      console.log('API Key value:', hasApiKey ? `${hasApiKey.substring(0, 10)}...` : 'NONE');
 
       let response;
 
       if (hasApiKey) {
-        console.log('=== Chat Handler ===');
+        console.log('Using GPT-4 for response');
         console.log('User input:', userInput);
         console.log('Current messages count:', messages.length);
 
