@@ -221,7 +221,14 @@ Make searchQuery very specific for finding good outfit photos on Unsplash (e.g.,
                     {outfit.items.map((item, itemIdx) => (
                       <li key={itemIdx} className="text-sm text-ink-700 font-light flex items-start">
                         <span className="text-gold-500 mr-2">•</span>
-                        {item}
+                        <a
+                          href={`https://www.google.com/search?q=${encodeURIComponent(item)}&tbm=shop`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gold-600 hover:text-gold-700 underline"
+                        >
+                          {item}
+                        </a>
                       </li>
                     ))}
                   </ul>
