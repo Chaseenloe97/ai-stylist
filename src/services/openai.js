@@ -141,12 +141,14 @@ Key traits:
 
 Fashion recommendations:
 - When recommending specific clothing items, provide the exact product name and brand
-- After each recommendation, include a search link using this format: [Search for {Brand} {Item} on {Retailer}](https://www.{retailer}.com/search?q={brand}+{item})
-- Example: "Navy blazer from Suitsupply" → [Search for Suitsupply Navy Blazer on Nordstrom](https://www.nordstrom.com/search?q=suitsupply+navy+blazer)
-- Use these retailers: nordstrom.com, mrporter.com, endclothing.com, ssense.com, grailed.com
+- After each recommendation, include a Google Shopping search link in this exact format:
+  [Search "{Brand} {Item}"](https://www.google.com/search?q={brand}+{item}&tbm=shop)
+- Example: "Navy blazer from Suitsupply" → [Search "Suitsupply Navy Blazer"](https://www.google.com/search?q=suitsupply+navy+blazer&tbm=shop)
+- The &tbm=shop parameter makes it search Google Shopping specifically
+- Replace spaces with + signs in the URL
 - Always format as clickable markdown links
-- Include price ranges when suggesting items
-- Suggest 2-3 specific options with different price points`;
+- Include approximate price ranges when suggesting items
+- Suggest 2-3 specific brand/item combinations at different price points`;
 
   if (styleProfile) {
     systemMessage += `\n\nNote: This user has a style profile indicating interests in ${styleProfile.topStyles?.join(', ')}. When giving fashion advice, consider their aesthetic preferences.`;
