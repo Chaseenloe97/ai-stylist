@@ -22,7 +22,7 @@ function App() {
     if (saved) {
       try {
         setStyleProfile(JSON.parse(saved));
-        setCurrentTab('chat');
+        // Don't automatically switch tabs - stay on home page
       } catch (e) {
         console.error('Failed to load style profile:', e);
       }
