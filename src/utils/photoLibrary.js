@@ -75,7 +75,7 @@ export const selectPhotoFiles = async (maxFiles = 20) => {
   return new Promise((resolve, reject) => {
     const input = document.createElement('input');
     input.type = 'file';
-    input.accept = 'image/jpeg,image/jpg,image/png,image/webp';
+    input.accept = 'image/jpeg,image/jpg,image/png,image/webp,image/heic,image/heif';
     input.multiple = true;
 
     input.onchange = async (e) => {

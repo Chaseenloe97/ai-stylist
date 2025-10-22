@@ -29,8 +29,17 @@ export default function Home({ onStyleLearned }) {
   const handleFolderSelect = async () => {
     try {
       setError(null);
-      const imageDataUrls = await selectPhotoFolder({ maxImages: 200 });
-      setUploadedImages(prev => [...prev, ...imageDataUrls]);
+
+      // Check if File System Access API is supported (Chrome, Edge)
+      // If not (Safari, Firefox), use file input fallback
+      if (isFileSystemAccessSupported()) {
+        const imageDataUrls = await selectPhotoFolder({ maxImages: 200 });
+        setUploadedImages(prev => [...prev, ...imageDataUrls]);
+      } else {
+        // Safari/Firefox fallback: use file input
+        const imageDataUrls = await selectPhotoFiles(200);
+        setUploadedImages(prev => [...prev, ...imageDataUrls]);
+      }
     } catch (err) {
       setError(err.message);
     }
@@ -172,9 +181,8 @@ export default function Home({ onStyleLearned }) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   {/* Instagram Connect */}
                   <button
-                    onClick={handleInstagramConnect}
-                    disabled={isConnectingInstagram}
-                    className="group card-luxury p-4 md:p-8 text-left hover:shadow-lg transition-all duration-300 disabled:opacity-50"
+                    disabled={true}
+                    className="card-luxury p-4 md:p-8 text-left opacity-60 cursor-not-allowed"
                   >
                     <div className="flex items-start space-x-3 md:space-x-4">
                       <div className="w-14 h-14 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -213,7 +221,9 @@ export default function Home({ onStyleLearned }) {
                           Upload Photos
                         </h3>
                         <p className="text-xs md:text-sm text-ink-600 font-light leading-relaxed">
-                          Select a photo folder from your device
+                          {isFileSystemAccessSupported()
+                            ? 'Select a photo folder from your device'
+                            : 'Select multiple photos from your library'}
                         </p>
                       </div>
                       <svg className="w-4 h-4 md:w-5 md:h-5 text-ink-900/30 group-hover:text-gold-500 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
