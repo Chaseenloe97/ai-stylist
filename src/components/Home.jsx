@@ -173,11 +173,6 @@ export default function Home({ onStyleLearned }) {
 
           {!styleResult ? (
             <div className="animate-slide-up">
-              <p className="text-sm md:text-base text-ink-600 mb-6 md:mb-12 max-w-xl mx-auto leading-relaxed px-4">
-                Allow Vic to study your aesthetic through your most cherished looks.
-                Together, we'll refine your personal style narrative.
-              </p>
-
               {/* Error Display */}
               {error && (
                 <div className="max-w-2xl mx-auto mb-8 p-4 bg-red-50 border border-red-200 text-red-800 text-sm">
