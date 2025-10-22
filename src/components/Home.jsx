@@ -183,11 +183,12 @@ export default function Home({ onStyleLearned }) {
                         </svg>
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-serif text-lg md:text-xl font-bold mb-1 md:mb-2 group-hover:text-gold-600 transition-colors">
+                        <h3 className="font-serif text-lg md:text-xl font-bold mb-1 md:mb-2 group-hover:text-gold-600 transition-colors flex items-center gap-2">
                           Connect Instagram
+                          <span className="text-xs font-light text-ink-900/50 bg-cream-100 px-2 py-0.5 rounded-full border border-cream-200">Coming Soon</span>
                         </h3>
                         <p className="text-xs md:text-sm text-ink-600 font-light leading-relaxed">
-                          {isConnectingInstagram ? 'Connecting securely...' : 'Import your posts for deeper style analysis'}
+                          Import your posts for deeper style analysis
                         </p>
                       </div>
                       <svg className="w-5 h-5 text-ink-900/30 group-hover:text-gold-500 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
