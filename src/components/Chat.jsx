@@ -87,7 +87,11 @@ export default function Chat({ styleProfile }) {
         timestamp: new Date()
       };
 
-      setMessages(prev => [...prev, aiMessage]);
+      const newMessages = [...messages, userMessage, aiMessage];
+      setMessages(newMessages);
+
+      // Save chat history to localStorage for Explore page personalization
+      localStorage.setItem('chatHistory', JSON.stringify(newMessages.slice(1))); // Skip initial greeting
     } catch (err) {
       console.error('Chat error:', err);
       setError(err.message);

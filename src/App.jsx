@@ -3,7 +3,7 @@ import GetStarted from './components/GetStarted';
 import Home from './components/Home';
 import Chat from './components/Chat';
 import Profile from './components/Profile';
-import Explore from './components/Explore';
+import PersonalizedExplore from './components/PersonalizedExplore';
 
 function App() {
   const [currentTab, setCurrentTab] = useState('home');
@@ -141,7 +141,7 @@ function App() {
           <Home onStyleLearned={handleStyleLearned} />
         )}
         {currentTab === 'explore' && (
-          <Explore styleProfile={styleProfile} />
+          <PersonalizedExplore />
         )}
         {currentTab === 'chat' && (
           <Chat styleProfile={styleProfile} />
