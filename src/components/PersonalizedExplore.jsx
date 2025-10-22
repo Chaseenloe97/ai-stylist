@@ -6,6 +6,19 @@ export default function PersonalizedExplore() {
   const [isLoading, setIsLoading] = useState(true);
   const [chatSummary, setChatSummary] = useState('');
 
+  // Curated fashion image IDs from Unsplash
+  const fashionImages = [
+    'https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?w=400&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1617137968427-85924c800a22?w=400&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=400&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=400&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=400&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=400&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?w=400&h=600&fit=crop',
+  ];
+
   useEffect(() => {
     generatePersonalizedRecommendations();
   }, []);
@@ -172,14 +185,12 @@ Make searchQuery very specific for finding good outfit photos on Unsplash (e.g.,
           {recommendations.map((outfit, idx) => (
             <div key={idx} className="card-luxury overflow-hidden group">
               {/* Image from Unsplash */}
-              <div className="relative aspect-[3/4] bg-cream-100 overflow-hidden">
+              <div className="relative aspect-[3/4] bg-gradient-to-br from-ink-900 to-ink-700 overflow-hidden">
                 <img
-                  src={`https://source.unsplash.com/400x600/?${encodeURIComponent(outfit.searchQuery)}`}
+                  src={fashionImages[idx % fashionImages.length]}
                   alt={outfit.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onError={(e) => {
-                    e.target.src = `https://source.unsplash.com/400x600/?fashion,${outfit.occasion}`;
-                  }}
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink-900/90 via-ink-900/20 to-transparent">
                   <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
