@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import Settings from './Settings';
 
 export default function Profile({ styleProfile, onRefresh }) {
   const [showInsights, setShowInsights] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
 
   if (!styleProfile) {
     return (
@@ -208,15 +206,9 @@ export default function Profile({ styleProfile, onRefresh }) {
           <div className="grid md:grid-cols-2 gap-4">
             <button
               onClick={onRefresh}
-              className="btn-outline rounded-none w-full"
-            >
-              Refine My Profile
-            </button>
-            <button
-              onClick={() => setShowSettings(true)}
               className="btn-gold rounded-none w-full"
             >
-              Settings & API Key
+              Refine My Profile
             </button>
           </div>
 
@@ -234,9 +226,6 @@ export default function Profile({ styleProfile, onRefresh }) {
           </div>
         </div>
       </div>
-
-      {/* Settings Modal */}
-      {showSettings && <Settings onClose={() => setShowSettings(false)} />}
     </div>
   );
 }
