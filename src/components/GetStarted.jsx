@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { trackSignup } from '../services/analytics';
 
 export default function GetStarted({ onComplete }) {
   const [formData, setFormData] = useState({
@@ -27,14 +28,22 @@ export default function GetStarted({ onComplete }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Save user data to localStorage
-    localStorage.setItem('vicUser', JSON.stringify({
+    const userData = {
       ...formData,
       signupDate: new Date().toISOString()
-    }));
+    };
+
+    // Save user data to localStorage
+    localStorage.setItem('vicUser', JSON.stringify(userData));
+
+    // Track signup in Google Sheets (async, don't wait for it)
+    trackSignup(userData).catch(err => {
+      console.error('Analytics tracking failed:', err);
+      // Don't block user flow if tracking fails
+    });
 
     // Complete onboarding
     onComplete(formData);
