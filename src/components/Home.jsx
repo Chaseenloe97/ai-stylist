@@ -186,6 +186,17 @@ export default function Home({ onStyleLearned }) {
                 </div>
               )}
 
+              {/* Training Banner */}
+              <div className="max-w-3xl mx-auto mb-8 md:mb-10 px-4 text-center">
+                <div className="inline-block">
+                  <p className="text-base md:text-xl text-ink-800 font-light leading-relaxed mb-2">
+                    Help Vic learn your unique style
+                  </p>
+                  <p className="text-sm md:text-base text-ink-600 font-light italic">
+                    Share a few photos and I'll curate personalized recommendations just for you
+                  </p>
+                </div>
+              </div>
 
               {/* Connection Options */}
               <div className="max-w-5xl mx-auto mb-8 md:mb-12 px-4">
