@@ -33,11 +33,12 @@ export default function Home({ onStyleLearned }) {
       // Check if File System Access API is supported (Chrome, Edge)
       // If not (Safari, Firefox), use file input fallback
       if (isFileSystemAccessSupported()) {
-        const imageDataUrls = await selectPhotoFolder({ maxImages: 200 });
+        // No limit - scan entire folder
+        const imageDataUrls = await selectPhotoFolder({ maxImages: Infinity });
         setUploadedImages(prev => [...prev, ...imageDataUrls]);
       } else {
-        // Safari/Firefox fallback: use file input
-        const imageDataUrls = await selectPhotoFiles(200);
+        // Safari/Firefox fallback: allow selecting many photos
+        const imageDataUrls = await selectPhotoFiles(500);
         setUploadedImages(prev => [...prev, ...imageDataUrls]);
       }
     } catch (err) {
@@ -228,7 +229,7 @@ export default function Home({ onStyleLearned }) {
                           Select Photos
                         </h3>
                         <p className="text-xs text-ink-600 font-light leading-relaxed">
-                          Pick individual photos (up to 50)
+                          Pick individual photos manually
                         </p>
                       </div>
                     </div>
@@ -251,8 +252,8 @@ export default function Home({ onStyleLearned }) {
                         </h3>
                         <p className="text-xs text-ink-600 font-light leading-relaxed">
                           {isFileSystemAccessSupported()
-                            ? 'Scan entire folder (up to 200)'
-                            : 'Select many photos (up to 200)'}
+                            ? 'Automatically scan entire folder'
+                            : 'Select as many photos as you want'}
                         </p>
                       </div>
                     </div>
