@@ -6,7 +6,7 @@ export default function Chat({ styleProfile }) {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: getVicGreeting(styleProfile),
+      content: "Hi! I'm Vic, your AI style assistant. I can help with fashion advice, outfit suggestions, style questions, or just chat about anything. What would you like to talk about?",
       timestamp: new Date()
     }
   ]);
@@ -48,8 +48,10 @@ export default function Chat({ styleProfile }) {
       if (hasApiKey) {
         console.log('Using GPT-4 for chat response...');
 
-        // Build conversation history INCLUDING the user's current message
+        // Build conversation history, excluding the initial greeting
+        // Start from index 1 to skip the first "Welcome" message
         const conversationHistory = messages
+          .slice(1) // Skip initial greeting
           .filter(msg => !msg.image && msg.content) // Skip image messages and ensure content exists
           .map(msg => ({
             sender: msg.role,
@@ -62,7 +64,9 @@ export default function Chat({ styleProfile }) {
           text: userInput
         });
 
-        // Call API with full history
+        console.log('Sending conversation with', conversationHistory.length, 'messages');
+
+        // Call API with clean conversation history
         response = await chatWithVic(conversationHistory, userInput, null, styleProfile);
       } else {
         console.log('Using mock response...');
