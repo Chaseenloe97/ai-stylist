@@ -78,16 +78,21 @@ Provide 9 outfit recommendations in this EXACT JSON format:
     {
       "title": "Outfit name",
       "description": "Why this works for them",
-      "items": ["Item 1 with brand", "Item 2 with brand", "Item 3 with brand"],
+      "items": ["Item 1 description (e.g., 'Navy wool blazer')", "Item 2 description", "Item 3 description"],
       "priceRange": "$XXX-$XXX",
       "occasion": "casual/professional/formal",
       "searchQuery": "specific search term for Unsplash photo",
       "shoppingLinks": [
-        {"item": "Item name", "url": "https://www.google.com/search?q=brand+item&tbm=shop"}
+        {"item": "Specific product with brand (e.g., 'Suitsupply Lazio Navy Blazer')", "url": "https://www.google.com/search?q=brand+item&tbm=shop"}
       ]
     }
   ]
 }
+
+IMPORTANT:
+- "items" should be GENERIC descriptions of the outfit pieces (e.g., "Navy blazer", "White dress shirt")
+- "shoppingLinks" should be SPECIFIC branded products to shop (e.g., "Brooks Brothers Milano Fit Blazer", "Charles Tyrwhitt Non-Iron Shirt")
+- Make sure these are DIFFERENT - items are what's IN the outfit, shoppingLinks are WHERE to buy similar items
 
 Make searchQuery very specific for finding good outfit photos on Unsplash (e.g., "man wearing navy suit", "woman in leather jacket street style").`;
 
@@ -123,48 +128,48 @@ Make searchQuery very specific for finding good outfit photos on Unsplash (e.g.,
         occasion: "casual",
         searchQuery: "minimalist fashion man white shirt",
         shoppingLinks: [
-          { item: "White Oxford Shirt", url: "https://www.google.com/search?q=white+oxford+shirt+men&tbm=shop" },
-          { item: "Black Slim Trousers", url: "https://www.google.com/search?q=black+slim+trousers+men&tbm=shop" },
-          { item: "White Leather Sneakers", url: "https://www.google.com/search?q=white+leather+sneakers&tbm=shop" }
+          { item: "Everlane Oxford Shirt", url: "https://www.google.com/search?q=everlane+oxford+shirt&tbm=shop" },
+          { item: "Uniqlo Smart Ankle Pants", url: "https://www.google.com/search?q=uniqlo+smart+ankle+pants&tbm=shop" },
+          { item: "Common Projects Achilles Low", url: "https://www.google.com/search?q=common+projects+achilles+low&tbm=shop" }
         ]
       },
       {
         title: "Smart Casual",
         description: "Polished yet relaxed for work or weekend",
-        items: ["Navy blazer", "Light blue OCBD", "Chinos", "Loafers"],
+        items: ["Navy blazer", "Light blue oxford shirt", "Khaki chinos", "Brown loafers"],
         priceRange: "$400-$700",
         occasion: "professional",
         searchQuery: "smart casual blazer man style",
         shoppingLinks: [
-          { item: "Navy Blazer", url: "https://www.google.com/search?q=navy+blazer+men&tbm=shop" },
-          { item: "Light Blue Oxford Shirt", url: "https://www.google.com/search?q=light+blue+oxford+shirt&tbm=shop" },
-          { item: "Chino Pants", url: "https://www.google.com/search?q=khaki+chinos+men&tbm=shop" }
+          { item: "J.Crew Ludlow Blazer", url: "https://www.google.com/search?q=jcrew+ludlow+blazer&tbm=shop" },
+          { item: "Brooks Brothers Non-Iron Shirt", url: "https://www.google.com/search?q=brooks+brothers+non+iron+shirt&tbm=shop" },
+          { item: "Bonobos Weekday Warrior Pants", url: "https://www.google.com/search?q=bonobos+weekday+warrior+pants&tbm=shop" }
         ]
       },
       {
         title: "Weekend Ready",
         description: "Comfortable and stylish for casual outings",
-        items: ["Grey crewneck sweater", "Dark denim", "White sneakers"],
+        items: ["Grey crewneck sweater", "Dark wash jeans", "White sneakers"],
         priceRange: "$150-$300",
         occasion: "casual",
         searchQuery: "casual weekend outfit men jeans",
         shoppingLinks: [
-          { item: "Grey Sweater", url: "https://www.google.com/search?q=grey+crewneck+sweater&tbm=shop" },
-          { item: "Dark Wash Jeans", url: "https://www.google.com/search?q=dark+wash+jeans+men&tbm=shop" },
-          { item: "White Sneakers", url: "https://www.google.com/search?q=white+sneakers+men&tbm=shop" }
+          { item: "Banana Republic Italian Merino Sweater", url: "https://www.google.com/search?q=banana+republic+merino+sweater&tbm=shop" },
+          { item: "Levi's 511 Slim Fit Jeans", url: "https://www.google.com/search?q=levis+511+slim+fit&tbm=shop" },
+          { item: "Adidas Stan Smith", url: "https://www.google.com/search?q=adidas+stan+smith&tbm=shop" }
         ]
       },
       {
         title: "Business Professional",
         description: "Command the boardroom with confidence",
-        items: ["Charcoal suit", "White dress shirt", "Silk tie", "Oxford shoes"],
+        items: ["Charcoal grey suit", "White dress shirt", "Burgundy silk tie", "Black cap-toe oxfords"],
         priceRange: "$600-$1200",
         occasion: "formal",
         searchQuery: "business suit professional men",
         shoppingLinks: [
-          { item: "Charcoal Suit", url: "https://www.google.com/search?q=charcoal+suit+men&tbm=shop" },
-          { item: "White Dress Shirt", url: "https://www.google.com/search?q=white+dress+shirt+men&tbm=shop" },
-          { item: "Silk Tie", url: "https://www.google.com/search?q=silk+tie+men&tbm=shop" }
+          { item: "Suitsupply Napoli Charcoal Suit", url: "https://www.google.com/search?q=suitsupply+napoli+charcoal+suit&tbm=shop" },
+          { item: "Charles Tyrwhitt Poplin Shirt", url: "https://www.google.com/search?q=charles+tyrwhitt+poplin+shirt&tbm=shop" },
+          { item: "Allen Edmonds Park Avenue", url: "https://www.google.com/search?q=allen+edmonds+park+avenue&tbm=shop" }
         ]
       },
       {
@@ -175,9 +180,9 @@ Make searchQuery very specific for finding good outfit photos on Unsplash (e.g.,
         occasion: "casual",
         searchQuery: "streetwear hoodie urban fashion",
         shoppingLinks: [
-          { item: "Oversized Hoodie", url: "https://www.google.com/search?q=oversized+hoodie+men&tbm=shop" },
-          { item: "Tapered Joggers", url: "https://www.google.com/search?q=tapered+joggers+men&tbm=shop" },
-          { item: "High Top Sneakers", url: "https://www.google.com/search?q=high+top+sneakers&tbm=shop" }
+          { item: "Champion Reverse Weave Hoodie", url: "https://www.google.com/search?q=champion+reverse+weave+hoodie&tbm=shop" },
+          { item: "Reigning Champ Slim Sweatpants", url: "https://www.google.com/search?q=reigning+champ+sweatpants&tbm=shop" },
+          { item: "Nike Air Force 1 High", url: "https://www.google.com/search?q=nike+air+force+1+high&tbm=shop" }
         ]
       },
       {
@@ -188,48 +193,48 @@ Make searchQuery very specific for finding good outfit photos on Unsplash (e.g.,
         occasion: "casual",
         searchQuery: "coastal casual linen summer",
         shoppingLinks: [
-          { item: "Linen Shirt", url: "https://www.google.com/search?q=linen+shirt+men&tbm=shop" },
-          { item: "Tailored Shorts", url: "https://www.google.com/search?q=tailored+shorts+men&tbm=shop" },
-          { item: "Leather Sandals", url: "https://www.google.com/search?q=leather+sandals+men&tbm=shop" }
+          { item: "Faherty Brand Linen Shirt", url: "https://www.google.com/search?q=faherty+linen+shirt&tbm=shop" },
+          { item: "Outlier New Way Shorts", url: "https://www.google.com/search?q=outlier+new+way+shorts&tbm=shop" },
+          { item: "Rainbow Double Layer Sandals", url: "https://www.google.com/search?q=rainbow+double+layer+sandals&tbm=shop" }
         ]
       },
       {
         title: "Tech Exec",
         description: "Silicon Valley polish meets comfort",
-        items: ["Merino quarter-zip", "Dark jeans", "Minimalist sneakers", "Leather backpack"],
+        items: ["Merino quarter-zip", "Dark indigo jeans", "Minimalist sneakers"],
         priceRange: "$400-$800",
         occasion: "professional",
         searchQuery: "tech executive casual style",
         shoppingLinks: [
-          { item: "Merino Quarter Zip", url: "https://www.google.com/search?q=merino+quarter+zip&tbm=shop" },
-          { item: "Dark Jeans", url: "https://www.google.com/search?q=dark+wash+jeans+men&tbm=shop" },
-          { item: "Minimalist Sneakers", url: "https://www.google.com/search?q=minimalist+sneakers&tbm=shop" }
+          { item: "Icebreaker Merino 260 Tech", url: "https://www.google.com/search?q=icebreaker+merino+260+tech&tbm=shop" },
+          { item: "A.P.C. Petit Standard Jeans", url: "https://www.google.com/search?q=apc+petit+standard&tbm=shop" },
+          { item: "Allbirds Wool Runners", url: "https://www.google.com/search?q=allbirds+wool+runners&tbm=shop" }
         ]
       },
       {
         title: "Evening Out",
         description: "Date night or dinner with style",
-        items: ["Black turtleneck", "Wool trousers", "Chelsea boots"],
+        items: ["Black turtleneck", "Grey wool trousers", "Suede chelsea boots"],
         priceRange: "$350-$600",
         occasion: "casual",
         searchQuery: "evening date night outfit men",
         shoppingLinks: [
-          { item: "Black Turtleneck", url: "https://www.google.com/search?q=black+turtleneck+men&tbm=shop" },
-          { item: "Wool Trousers", url: "https://www.google.com/search?q=wool+trousers+men&tbm=shop" },
-          { item: "Chelsea Boots", url: "https://www.google.com/search?q=chelsea+boots+men&tbm=shop" }
+          { item: "Uniqlo Extra Fine Merino Turtleneck", url: "https://www.google.com/search?q=uniqlo+merino+turtleneck&tbm=shop" },
+          { item: "Massimo Dutti Wool Trousers", url: "https://www.google.com/search?q=massimo+dutti+wool+trousers&tbm=shop" },
+          { item: "Thursday Boot Company Duke", url: "https://www.google.com/search?q=thursday+boots+duke&tbm=shop" }
         ]
       },
       {
         title: "Athletic Refined",
         description: "Gym to coffee shop transition",
-        items: ["Performance polo", "Athletic joggers", "Running shoes"],
+        items: ["Performance polo", "Athletic joggers", "Training sneakers"],
         priceRange: "$180-$320",
         occasion: "casual",
         searchQuery: "athletic casual athleisure men",
         shoppingLinks: [
-          { item: "Performance Polo", url: "https://www.google.com/search?q=performance+polo+men&tbm=shop" },
-          { item: "Athletic Joggers", url: "https://www.google.com/search?q=athletic+joggers+men&tbm=shop" },
-          { item: "Running Shoes", url: "https://www.google.com/search?q=running+shoes+men&tbm=shop" }
+          { item: "Lululemon Metal Vent Tech Polo", url: "https://www.google.com/search?q=lululemon+metal+vent+tech+polo&tbm=shop" },
+          { item: "Nike Tech Fleece Joggers", url: "https://www.google.com/search?q=nike+tech+fleece+joggers&tbm=shop" },
+          { item: "On Cloud 5 Running Shoes", url: "https://www.google.com/search?q=on+cloud+5&tbm=shop" }
         ]
       },
     ];
