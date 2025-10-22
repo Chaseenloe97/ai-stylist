@@ -346,10 +346,10 @@ export default function Chat({ styleProfile }) {
       {/* Input Area */}
       <div className="bg-white border-t-2 border-cream-200 px-3 md:px-6 py-3 md:py-6">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-end space-x-2 md:space-x-4">
+          <div className="flex items-center space-x-2 md:space-x-4">
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="p-2 md:p-3 text-ink-900 hover:bg-cream-100 transition-colors border border-cream-200"
+              className="flex-shrink-0 p-2 md:p-3 text-ink-900 hover:bg-cream-100 transition-colors border border-cream-200"
               title="Upload image"
             >
               <svg className="h-5 w-5 md:h-6 md:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -364,7 +364,7 @@ export default function Chat({ styleProfile }) {
               onChange={handleImageUpload}
             />
 
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -374,17 +374,17 @@ export default function Chat({ styleProfile }) {
                     handleSend();
                   }
                 }}
-                placeholder="Share your style questions with Vic..."
+                placeholder="Share your style questions..."
                 rows="1"
-                className="input-luxury resize-none"
-                style={{ minHeight: '56px' }}
+                className="input-luxury resize-none w-full text-sm md:text-base"
+                style={{ minHeight: '44px', maxHeight: '120px' }}
               />
             </div>
 
             <button
               onClick={handleSend}
               disabled={!input.trim()}
-              className="btn-primary rounded-none disabled:opacity-30 disabled:cursor-not-allowed px-8"
+              className="flex-shrink-0 btn-primary rounded-none disabled:opacity-30 disabled:cursor-not-allowed px-4 md:px-8 py-3 text-sm md:text-base"
             >
               Send
             </button>
