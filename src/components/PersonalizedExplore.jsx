@@ -59,14 +59,19 @@ export default function PersonalizedExplore() {
           .map(msg => msg.content)
           .join('\n');
 
-        const analysisPrompt = `Based on this user's recent chat history, identify their fashion interests and recommend 6 specific outfit combinations.
+        const analysisPrompt = `Based on this user's recent chat history and their analyzed style profile, recommend 10 specific outfit combinations that match their aesthetic.
 
 User's chat history:
 ${userMessages}
 
-${parsedProfile ? `User's style profile: ${parsedProfile.topStyles?.join(', ')}` : ''}
+${parsedProfile ? `User's style profile:
+- Top Styles: ${parsedProfile.topStyles?.join(', ')}
+- Color Palette: ${parsedProfile.topTags?.join(', ')}
+- Aesthetic Traits: ${parsedProfile.aestheticTraits?.join(', ')}
+- Lifestyle: ${parsedProfile.lifestyle}
+- Luxury Preferences: ${parsedProfile.luxuryProfile}` : ''}
 
-Provide 6 outfit recommendations in this EXACT JSON format:
+Provide 10 outfit recommendations in this EXACT JSON format:
 {
   "summary": "A brief 1-sentence summary of what the user is looking for",
   "outfits": [
@@ -119,7 +124,8 @@ Make searchQuery very specific for finding good outfit photos on Unsplash (e.g.,
         searchQuery: "minimalist fashion man white shirt",
         shoppingLinks: [
           { item: "White Oxford Shirt", url: "https://www.google.com/search?q=white+oxford+shirt+men&tbm=shop" },
-          { item: "Black Slim Trousers", url: "https://www.google.com/search?q=black+slim+trousers+men&tbm=shop" }
+          { item: "Black Slim Trousers", url: "https://www.google.com/search?q=black+slim+trousers+men&tbm=shop" },
+          { item: "White Leather Sneakers", url: "https://www.google.com/search?q=white+leather+sneakers&tbm=shop" }
         ]
       },
       {
@@ -131,6 +137,7 @@ Make searchQuery very specific for finding good outfit photos on Unsplash (e.g.,
         searchQuery: "smart casual blazer man style",
         shoppingLinks: [
           { item: "Navy Blazer", url: "https://www.google.com/search?q=navy+blazer+men&tbm=shop" },
+          { item: "Light Blue Oxford Shirt", url: "https://www.google.com/search?q=light+blue+oxford+shirt&tbm=shop" },
           { item: "Chino Pants", url: "https://www.google.com/search?q=khaki+chinos+men&tbm=shop" }
         ]
       },
@@ -143,7 +150,99 @@ Make searchQuery very specific for finding good outfit photos on Unsplash (e.g.,
         searchQuery: "casual weekend outfit men jeans",
         shoppingLinks: [
           { item: "Grey Sweater", url: "https://www.google.com/search?q=grey+crewneck+sweater&tbm=shop" },
-          { item: "Dark Wash Jeans", url: "https://www.google.com/search?q=dark+wash+jeans+men&tbm=shop" }
+          { item: "Dark Wash Jeans", url: "https://www.google.com/search?q=dark+wash+jeans+men&tbm=shop" },
+          { item: "White Sneakers", url: "https://www.google.com/search?q=white+sneakers+men&tbm=shop" }
+        ]
+      },
+      {
+        title: "Business Professional",
+        description: "Command the boardroom with confidence",
+        items: ["Charcoal suit", "White dress shirt", "Silk tie", "Oxford shoes"],
+        priceRange: "$600-$1200",
+        occasion: "formal",
+        searchQuery: "business suit professional men",
+        shoppingLinks: [
+          { item: "Charcoal Suit", url: "https://www.google.com/search?q=charcoal+suit+men&tbm=shop" },
+          { item: "White Dress Shirt", url: "https://www.google.com/search?q=white+dress+shirt+men&tbm=shop" },
+          { item: "Silk Tie", url: "https://www.google.com/search?q=silk+tie+men&tbm=shop" }
+        ]
+      },
+      {
+        title: "Streetwear Edge",
+        description: "Urban style with modern attitude",
+        items: ["Oversized hoodie", "Tapered joggers", "High-top sneakers"],
+        priceRange: "$200-$450",
+        occasion: "casual",
+        searchQuery: "streetwear hoodie urban fashion",
+        shoppingLinks: [
+          { item: "Oversized Hoodie", url: "https://www.google.com/search?q=oversized+hoodie+men&tbm=shop" },
+          { item: "Tapered Joggers", url: "https://www.google.com/search?q=tapered+joggers+men&tbm=shop" },
+          { item: "High Top Sneakers", url: "https://www.google.com/search?q=high+top+sneakers&tbm=shop" }
+        ]
+      },
+      {
+        title: "Coastal Casual",
+        description: "Effortless beach-to-bar versatility",
+        items: ["Linen shirt", "Tailored shorts", "Leather sandals"],
+        priceRange: "$180-$350",
+        occasion: "casual",
+        searchQuery: "coastal casual linen summer",
+        shoppingLinks: [
+          { item: "Linen Shirt", url: "https://www.google.com/search?q=linen+shirt+men&tbm=shop" },
+          { item: "Tailored Shorts", url: "https://www.google.com/search?q=tailored+shorts+men&tbm=shop" },
+          { item: "Leather Sandals", url: "https://www.google.com/search?q=leather+sandals+men&tbm=shop" }
+        ]
+      },
+      {
+        title: "Tech Exec",
+        description: "Silicon Valley polish meets comfort",
+        items: ["Merino quarter-zip", "Dark jeans", "Minimalist sneakers", "Leather backpack"],
+        priceRange: "$400-$800",
+        occasion: "professional",
+        searchQuery: "tech executive casual style",
+        shoppingLinks: [
+          { item: "Merino Quarter Zip", url: "https://www.google.com/search?q=merino+quarter+zip&tbm=shop" },
+          { item: "Dark Jeans", url: "https://www.google.com/search?q=dark+wash+jeans+men&tbm=shop" },
+          { item: "Minimalist Sneakers", url: "https://www.google.com/search?q=minimalist+sneakers&tbm=shop" }
+        ]
+      },
+      {
+        title: "Evening Out",
+        description: "Date night or dinner with style",
+        items: ["Black turtleneck", "Wool trousers", "Chelsea boots"],
+        priceRange: "$350-$600",
+        occasion: "casual",
+        searchQuery: "evening date night outfit men",
+        shoppingLinks: [
+          { item: "Black Turtleneck", url: "https://www.google.com/search?q=black+turtleneck+men&tbm=shop" },
+          { item: "Wool Trousers", url: "https://www.google.com/search?q=wool+trousers+men&tbm=shop" },
+          { item: "Chelsea Boots", url: "https://www.google.com/search?q=chelsea+boots+men&tbm=shop" }
+        ]
+      },
+      {
+        title: "Athletic Refined",
+        description: "Gym to coffee shop transition",
+        items: ["Performance polo", "Athletic joggers", "Running shoes"],
+        priceRange: "$180-$320",
+        occasion: "casual",
+        searchQuery: "athletic casual athleisure men",
+        shoppingLinks: [
+          { item: "Performance Polo", url: "https://www.google.com/search?q=performance+polo+men&tbm=shop" },
+          { item: "Athletic Joggers", url: "https://www.google.com/search?q=athletic+joggers+men&tbm=shop" },
+          { item: "Running Shoes", url: "https://www.google.com/search?q=running+shoes+men&tbm=shop" }
+        ]
+      },
+      {
+        title: "Heritage Classic",
+        description: "Timeless Americana with a modern twist",
+        items: ["Flannel shirt", "Raw denim", "Work boots"],
+        priceRange: "$250-$450",
+        occasion: "casual",
+        searchQuery: "heritage workwear americana style",
+        shoppingLinks: [
+          { item: "Flannel Shirt", url: "https://www.google.com/search?q=flannel+shirt+men&tbm=shop" },
+          { item: "Raw Denim Jeans", url: "https://www.google.com/search?q=raw+denim+jeans&tbm=shop" },
+          { item: "Work Boots", url: "https://www.google.com/search?q=work+boots+men&tbm=shop" }
         ]
       }
     ];

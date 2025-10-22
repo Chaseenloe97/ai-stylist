@@ -29,7 +29,7 @@ export default function Home({ onStyleLearned }) {
   const handleFolderSelect = async () => {
     try {
       setError(null);
-      const imageDataUrls = await selectPhotoFolder({ maxImages: 50 });
+      const imageDataUrls = await selectPhotoFolder({ maxImages: 200 });
       setUploadedImages(prev => [...prev, ...imageDataUrls]);
     } catch (err) {
       setError(err.message);
