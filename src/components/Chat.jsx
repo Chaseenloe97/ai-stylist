@@ -189,6 +189,44 @@ export default function Chat({ styleProfile }) {
     });
   };
 
+  // Convert markdown links to clickable HTML links
+  const renderMessageWithLinks = (text) => {
+    // Replace markdown links [text](url) with HTML links
+    const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = linkRegex.exec(text)) !== null) {
+      // Add text before the link
+      if (match.index > lastIndex) {
+        parts.push(text.substring(lastIndex, match.index));
+      }
+
+      // Add the link
+      parts.push(
+        <a
+          key={match.index}
+          href={match[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gold-600 hover:text-gold-700 underline font-medium"
+        >
+          {match[1]}
+        </a>
+      );
+
+      lastIndex = match.index + match[0].length;
+    }
+
+    // Add remaining text
+    if (lastIndex < text.length) {
+      parts.push(text.substring(lastIndex));
+    }
+
+    return parts.length > 0 ? parts : text;
+  };
+
   return (
     <div className="flex flex-col h-screen bg-cream-50">
       {/* Header */}
@@ -256,9 +294,9 @@ export default function Chat({ styleProfile }) {
                             className="rounded-none mb-3 md:mb-4 max-w-full h-auto"
                           />
                         )}
-                        <p className="text-sm md:text-base text-ink-900 leading-relaxed whitespace-pre-wrap font-light">
-                          {msg.content}
-                        </p>
+                        <div className="text-sm md:text-base text-ink-900 leading-relaxed whitespace-pre-wrap font-light">
+                          {renderMessageWithLinks(msg.content)}
+                        </div>
                       </div>
                       <p className="text-[10px] md:text-xs text-ink-500 mt-1 md:mt-2 ml-1 font-light">
                         {formatTime(msg.timestamp)}
